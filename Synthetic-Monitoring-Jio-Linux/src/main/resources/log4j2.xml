@@ -1,0 +1,39 @@
+<configuration>
+    <Appenders>
+        <!-- Console Appender -->
+        <Console name="Console" target="SYSTEM_OUT">
+            <!-- Update pattern to include IST -->
+            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss.SSS, Asia/Kolkata} %-5level - %msg%n"/>
+        </Console>
+        
+        <!-- RollingFile Appender -->
+        <RollingFile name="RollingFile" 
+                     fileName="/elkapp/app/savitri/synthetic-monitoring.log"
+                     filePattern="/elkapp/app/savitri/synthetic-monitoring-%d{yyyy-MM-dd}.log.gz" append="true">
+            <PatternLayout>
+                <!-- Update pattern to include IST -->
+                <Pattern>%d{yyyy-MM-dd HH:mm:ss.SSS, Asia/Kolkata} [%t] %-5level - %msg%n</Pattern>
+            </PatternLayout>
+            
+            <!-- Time-based rollover policy -->
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="1" modulate="true"/>
+            </Policies>
+            
+            <!-- Rollover strategy with a maximum of 30 files -->
+            <DefaultRolloverStrategy max="30"/>
+        </RollingFile>
+    </Appenders>
+    
+    <Loggers>
+        <!-- Logger for specific package -->
+        <Logger name="com.sdetadda" level="debug" additivity="true">
+            <AppenderRef ref="Console"/>
+        </Logger>
+        
+        <!-- Root Logger -->
+        <Root level="debug">
+            <AppenderRef ref="RollingFile"/>
+        </Root>
+    </Loggers>
+</configuration>
