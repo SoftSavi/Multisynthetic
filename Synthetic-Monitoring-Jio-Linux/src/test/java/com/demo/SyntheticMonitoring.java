@@ -39,7 +39,7 @@
 
 		 public static void main(String[] args) throws InterruptedException {
 		        try {
-		            System.out.println("Starting URL monitoring...");
+		            System.out.println("Starting URL monitoring.....");
 
 		            // Monitor URLs
 		            SyntheticMonitoring syntheticMonitoring = new SyntheticMonitoring();
