@@ -48,7 +48,7 @@ public class SyntheticMonitoring {
 		 
 		 public void monitorUrls() throws InterruptedException, IOException {
 			    System.out.println("Using browser: " + selectedBrowser);
-			    logger.info("Starting URL monitoring process...");  // Start log
+			    
 
 			    initializeDriver(selectedBrowser);
 			    
@@ -70,7 +70,7 @@ public class SyntheticMonitoring {
 			    }
 
 			    driver.quit();
-			    logger.info("Completed URL monitoring process...");  // End log
+			    
 			}
 
 
@@ -234,9 +234,12 @@ public class SyntheticMonitoring {
 		        // Send the email if any alert is triggered, either due to page issues or exceptions
 		        if (alertTriggered) {
 		            sendEmail("Email Status: " + "Critical Error Notification ", emailBody.toString());
+		        } else {
+		            logger.info("Email Status: N/A");  // Log when no email is sent
 		        }
 		    }
 		}
+
 		
 
 		private static long getResponseTime(String currentUrl) {
@@ -453,19 +456,21 @@ public class SyntheticMonitoring {
 		        message.setSubject(subject);
 		        message.setText(body);
 
-		        Transport.send(message);
+		        Transport.send(message);  // Attempt to send email
 		        emailTriggered = true;
-		        emailSentSuccessfully = true;
+		        emailSentSuccessfully = true;  // Set to true when email is successfully sent
 		    } catch (Exception e) {
-		        emailTriggered = true;
+		        emailTriggered = true;  // Email was triggered but an error occurred
 		        emailSentSuccessfully = false;
-		        logger.error("Email Status: Failed | Error: " + e.getMessage());
+		        logger.error("Email Status: Failed | Error: " + e.getMessage());  // Log the error
 		    } finally {
-		        // Log email status only once, based on flags
-		        if (emailTriggered && emailSentSuccessfully) {
-		            logger.info("Email Status: Success");
-		        } else if (!emailTriggered) {
-		            logger.info("Email Status: N/A");
+		        // Log the status based on the conditions
+		        if (!emailTriggered) {
+		            logger.info("Email Status: N/A");  // No email attempt was made
+		        } else if (emailSentSuccessfully) {
+		            logger.info("Email Status: Success");  // Email successfully sent
+		        } else {
+		            logger.info("Email Status: Failed");  // Email failed to send
 		        }
 		    }
 		}
