@@ -17,12 +17,7 @@ import javax.crypto.spec.SecretKeySpec;
 
 	    public static void main(String[] args) throws Exception {
 	    	
-	        //String username = "Administrator";
-	       //String password = "Admin@123";
-	        
-	        String username = "vijay.nikam@ext.jiofinance.in";
-	        String password="Clover#2024";
-
+	       
 	        // Encrypt the credentials
 	        String encryptedUsername = encrypt(username, SECRET_KEY);
 	        String encryptedPassword = encrypt(password, SECRET_KEY);
