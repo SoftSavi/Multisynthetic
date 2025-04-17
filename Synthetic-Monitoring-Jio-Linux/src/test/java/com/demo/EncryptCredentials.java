@@ -15,6 +15,9 @@ import javax.crypto.spec.SecretKeySpec;
 	    private static final String ALGORITHM = "AES";
 	    private static final String SECRET_KEY = "pm#dds$rxz4jhsdt";  // 16 characters for AES-128
 
+	    String username = "vijay.nikam@ext.jiofinance.in";
+            String password="July@2024";	
+
 	    public static void main(String[] args) throws Exception {
 	    	
 	       
